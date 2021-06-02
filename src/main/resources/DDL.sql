@@ -7,8 +7,8 @@ CREATE TABLE if not exists public.DATASOURCECONFIG (
 	password VARCHAR(255),
 	initialize BOOLEAN
 );
-INSERT INTO DATASOURCECONFIG VALUES (1, 'org.postgresql.Driver', 'jdbc:postgresql://localhost:5432/test?currentSchema=test1&ApplicationName=MultiTenant', 'test1', 'postgres', 'postgres', true);
-INSERT INTO DATASOURCECONFIG VALUES (2, 'org.postgresql.Driver', 'jdbc:postgresql://localhost:5432/test?currentSchema=test2&ApplicationName=MultiTenant', 'test2', 'postgres', 'postgres', true);
+INSERT INTO DATASOURCECONFIG VALUES (1, 'org.postgresql.Driver', 'jdbc:postgresql://localhost:5432/postgres?currentSchema=test1&ApplicationName=MultiTenant', 'test1', 'postgres', 'postgres', true);
+INSERT INTO DATASOURCECONFIG VALUES (2, 'org.postgresql.Driver', 'jdbc:postgresql://localhost:5432/postgres?currentSchema=test2&ApplicationName=MultiTenant', 'test2', 'postgres', 'postgres', true);
 
 ##### DDL needs to be executed for Schema-Based MultiTenancy ############
 create schema if not exists test1;

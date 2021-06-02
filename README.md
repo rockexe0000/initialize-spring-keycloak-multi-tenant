@@ -4,7 +4,7 @@
 
 * Run PostgresSQL
 
-`docker run -d -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=test --name postgres postgres:9.6-alpine`
+`docker run -d -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres --name postgres postgres:9.6-alpine`
 
 * Modify application.yml
 
@@ -47,3 +47,54 @@ Once started you can go and request the data using different tenants :
 *  `curl -X GET   http://localhost:8080/ -H 'Content-Type: application/json' -H 'X-TenantID: test1'`
 
 * `curl -X GET   http://localhost:8080/ -H 'Content-Type: application/json' -H 'X-TenantID: test2'`
+
+
+
+
+
+
+<br />
+
+# 1. 用戶登入SignIn
+
+
+
+<table>
+  <tr><th>HTTP Method</th><th>URL</th><th>Description</th></tr>
+  <tr><td>POST</td><td>signin</td><td>用戶登入SignIn</td></tr>
+</table>
+
+
+
+
+<br />
+
+## HTTP Request Parameter
+
+
+
+```json
+# Header
+{
+    "Authorization": "Bearer LHG2D2eC8FKP8^9xp@DK",
+    "X-TenantID": "test1",
+}
+# Body
+{
+    
+}
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+

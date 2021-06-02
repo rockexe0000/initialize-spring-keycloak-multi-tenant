@@ -1,0 +1,80 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: MultiTenant
+  datasource:
+    url: 'jdbc:postgresql://localhost:5432/postgres?ApplicationName=MultiTenant'
+    username: 'postgres'
+    password: 'postgres'
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: none
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    
+
+
+
+
+
+#keycloak.client-id=jakarta-school
+#keycloak.client-secret=197bc3b4-64b0-452f-9bdb-fcaea0988e90
+#keycloak.scope=openid, profile
+#keycloak.authorization-grant-type=password
+#
+#keycloak.authorization-uri=http://localhost:8080/auth/realms/education/protocol/openid-connect/auth
+#keycloak.user-info-uri=http://localhost:8080/auth/realms/education/protocol/openid-connect/userinfo
+#keycloak.token-uri=http://localhost:8080/auth/realms/education/protocol/openid-connect/token
+#keycloak.logout=http://localhost:8080/auth/realms/education/protocol/openid-connect/logout
+#keycloak.jwk-set-uri=http://localhost:8080/auth/realms/education/protocol/openid-connect/certs
+#keycloak.certs-id=vdaec4Br3ZnRFtZN-pimK9v1eGd3gL2MHu8rQ6M5SiE
+
+
+
+
+
+
+
+
+    
+logging:
+  level:
+    root: info
+    com.example: debug
+    com.cathayholdings.smarthealth: debug
+    
+    org:
+      keycloak: DEBUG
+      pringframework:
+        security: DEBUG
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
