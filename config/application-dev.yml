@@ -45,6 +45,7 @@ logging:
     root: info
     com.example: debug
     com.cathayholdings.smarthealth: debug
+    com.czetsuyatech: debug
     
     org:
       keycloak: DEBUG

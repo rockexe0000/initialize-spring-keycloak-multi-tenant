@@ -1,11 +1,13 @@
 package com.example.controller;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.security.Principal;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import org.keycloak.KeycloakPrincipal;
 import org.keycloak.KeycloakSecurityContext;
@@ -42,7 +44,7 @@ public class CityController {
 
   @RequestMapping(value = "/signin")
   public ResponseEntity<?> createAuthenticationToken(HttpServletRequest request)
-      throws MalformedURLException {
+      throws IOException, MalformedURLException {
 
     String tenantID = request.getHeader("X-TenantID");
     if (tenantID.isBlank()) {
@@ -55,14 +57,24 @@ public class CityController {
      * var jsonObject = (JSONObject) JSONObject.toJSON(request.getParameterMap()); // NOSONAR
      * 
      * Map<String, Object> headers = new HashMap<>(); headers.put(HttpHeaders.CONTENT_TYPE,
-     * MediaType.APPLICATION_JSON_VALUE); headers.put(HttpHeaders.HOST, new
+     * MediaType.APPLICATION_FORM_URLENCODED_VALUE); headers.put(HttpHeaders.HOST, new
      * URL("http://localhost:8081").getHost()); headers.put("X-TenantID", tenantID);
      * 
+     * logger.debug("headers=[" + jsonObject.toJSON(headers) + "]"); // NOSONAR
      * 
-     * Map<String, Object> body = new HashMap<>();
      * 
-     * body.put("client_id", tenantID); body.put("username", request.getParameter("username"));
-     * body.put("password", request.getParameter("password")); body.put("grant_type", "password");
+     * 
+     * String jsonString = IOUtils.toString(request.getInputStream());
+     * 
+     * logger.debug("request=[" + jsonObject.toJSON(jsonString) + "]"); // NOSONAR
+     * 
+     * // request.getParameter("username") // request.getParameter("password") Map<String, Object>
+     * body = new HashMap<>();
+     * 
+     * body.put("client_id", tenantID); body.put("username", "user001"); body.put("password",
+     * "user001"); body.put("grant_type", "password");
+     * 
+     * logger.debug("body=[" + jsonObject.toJSON(body) + "]"); // NOSONAR
      * 
      * 
      * var feignClient = tenantHttpClient.getIdToken(headers, body); logger.debug("feignClient=[" +
@@ -101,15 +113,22 @@ public class CityController {
       // this value is the one use to call another service as bearer token
       // Authorization : Bearer kcs.getTokenString()
       // use this link to read the token https://jwt.io
-      System.out.println(ksc.getTokenString());
-      System.out.println(accessToken.getGivenName());
-      System.out.println(accessToken.getFamilyName());
+      System.out.println("ksc.getTokenString()=[" + ksc.getTokenString() + "]");
+      System.out.println("ksc.getTokenString()=[" + accessToken.getGivenName() + "]");
+      System.out.println("accessToken.getFamilyName()=[" + accessToken.getFamilyName() + "]");
+
+
+      Set<String> roles = accessToken.getRealmAccess().getRoles();
+      for (String role : roles) {
+        System.out.println("role=[" + role + "]");
+      }
 
 
       map.put("userInfo", tokenInfo);
       map.put("ksc.getTokenString()", ksc.getTokenString());
       map.put("accessToken.getGivenName()", accessToken.getGivenName());
       map.put("accessToken.getFamilyName()", accessToken.getFamilyName());
+      map.put("roles", roles);
     }
 
 

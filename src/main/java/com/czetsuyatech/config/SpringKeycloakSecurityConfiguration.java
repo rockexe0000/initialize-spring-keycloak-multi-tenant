@@ -118,12 +118,16 @@ public class SpringKeycloakSecurityConfiguration {
       return registrationBean;
     }
 
+
+
     @Bean
     @Override
     @ConditionalOnMissingBean(HttpSessionManager.class)
     protected HttpSessionManager httpSessionManager() {
       return new HttpSessionManager();
     }
+
+
 
     /**
      * Configuration spécifique à keycloak (ajouts de filtres, etc)
@@ -188,7 +192,7 @@ public class SpringKeycloakSecurityConfiguration {
           .and().authorizeRequests().antMatchers(HttpMethod.OPTIONS).permitAll()
 
           .antMatchers("/logout", "/", "/unsecured").permitAll() //
-          .antMatchers("/**/catalog").authenticated() //
+          // .antMatchers("/**/catalog").authenticated() //
           // .antMatchers("/**/catalog").hasRole("CATALOG_MANAGER") //
 
           .anyRequest().authenticated();
