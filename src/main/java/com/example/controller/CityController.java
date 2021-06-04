@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import org.keycloak.KeycloakPrincipal;
 import org.keycloak.KeycloakSecurityContext;
@@ -42,7 +43,7 @@ public class CityController {
   @Autowired
   TenantHttpClient tenantHttpClient;
 
-  @RequestMapping(value = "/signin")
+  @RequestMapping(value = "/userInfo")
   public ResponseEntity<?> createAuthenticationToken(HttpServletRequest request)
       throws IOException, MalformedURLException {
 
@@ -136,6 +137,13 @@ public class CityController {
     return map;
 
     // return "userInfo " + tokenInfo;
+  }
+
+
+  @RequestMapping(path = "/logout", method = RequestMethod.GET)
+  public ResponseEntity<?> logout(HttpServletRequest request) throws ServletException {
+    request.logout();
+    return new ResponseEntity<>(HttpStatus.OK);
   }
 
 

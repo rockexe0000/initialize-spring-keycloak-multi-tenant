@@ -57,6 +57,8 @@ public class PathBasedConfigResolver implements KeycloakConfigResolver {
       adapterConfig.setPublicClient(true);
       adapterConfig.setConfidentialPort(0);
 
+      // adapterConfig.setVerifyTokenAudience(true);
+
 
       cache.put(realm, KeycloakDeploymentBuilder.build(adapterConfig));
 

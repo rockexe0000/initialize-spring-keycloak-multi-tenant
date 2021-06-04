@@ -112,24 +112,36 @@ docker run --name=czetsuyatech-kc -p 8081:8080 -e KEYCLOAK_USER=admin -e KEYCLOA
 ```
 
 
-* `curl -X POST   http://localhost:8080/city/ -H 'Content-Type: application/json' -H 'X-TenantID: test1' -d '{"name":"Mumbai"}'`
 
-* `curl -X POST   http://localhost:8080/city/ -H 'Content-Type: application/json' -H 'X-TenantID: test2' -d '{"name":"Kolkata"}'`
+* `curl -X GET   http://localhost:8080/userInfo/ -H 'Authorization: bearer eyJhbGciOiJSUz...' -H 'Content-Type: application/json' -H 'X-TenantID: test1' -d '{"name":"Mumbai"}'`
 
-*  `curl -X GET   http://localhost:8080/city/ -H 'Content-Type: application/json' -H 'X-TenantID: test1'`
 
-* `curl -X GET   http://localhost:8080/city/ -H 'Content-Type: application/json' -H 'X-TenantID: test2'`
 
+* `curl -X GET   http://localhost:8080/logout/ -H 'Authorization: bearer eyJhbGciOiJSUz...' -H 'Content-Type: application/json' -H 'X-TenantID: test1' -d '{"name":"Mumbai"}'`
 
 
 
 
 
+* `curl -X POST   http://localhost:8080/city/ -H 'Authorization: bearer eyJhbGciOiJSUz...' -H 'Content-Type: application/json' -H 'X-TenantID: test1' -d '{"name":"Mumbai"}'`
+
+* `curl -X POST   http://localhost:8080/city/ -H 'Authorization: bearer eyJhbGciOiJSUz...' -H 'Content-Type: application/json' -H 'X-TenantID: test2' -d '{"name":"Kolkata"}'`
+
+*  `curl -X GET   http://localhost:8080/city/ -H 'Authorization: bearer eyJhbGciOiJSUz...' -H 'Content-Type: application/json' -H 'X-TenantID: test1'`
+
+* `curl -X GET   http://localhost:8080/city/ -H 'Authorization: bearer eyJhbGciOiJSUz...' -H 'Content-Type: application/json' -H 'X-TenantID: test2'`
 
 
 
 
+## References
 
+
+[Multi-Tenancy Implementation using Spring Boot + Hibernate](https://medium.com/swlh/multi-tenancy-implementation-using-spring-boot-hibernate-6a8e3ecb251a)
+
+
+
+[How to Implement MultiTenancy with Spring Boot and Keycloak](https://www.czetsuyatech.com/2020/11/how-to-implement-multitenancy-with-spring-boot-and-keycloak.html)
 
 
 

@@ -49,6 +49,7 @@ public class MultitenantKeycloakAuthenticationEntryPoint extends KeycloakAuthent
     String realm = tenantID;
 
 
+
     String contextAwareLoginUri = request.getContextPath() + "/tenant/" + realm + DEFAULT_LOGIN_URI;
     logger.debug("contextAwareLoginUri=[" + contextAwareLoginUri + "]"); // NOSONAR
 

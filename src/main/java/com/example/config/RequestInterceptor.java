@@ -33,6 +33,14 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
   public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
       ModelAndView modelAndView) throws Exception {
     TenantContext.clear();
+
+    // try {
+    // request.logout();
+    // } catch (Exception e) {
+    // System.out.println("request.logout() is Exception !!!"); // NOSONAR
+    // }
+
   }
+
 
 }
