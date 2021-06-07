@@ -2,7 +2,7 @@ server:
   port: 8080
   servlet:
     session:
-      timeout: 5s
+      timeout: 1s
 spring:
   application:
     name: MultiTenant
@@ -52,11 +52,15 @@ logging:
     
     org:
       keycloak: DEBUG
-      pringframework:
-        security: DEBUG
+      springframework:
+        security: 
+          web:
+            FilterChainProxy: DEBUG
 
 
 
+
+#logging.level.org.springframework.security.web.FilterChainProxy=DEBUG
 
 
 

@@ -30,7 +30,6 @@ import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.security.web.authentication.preauth.x509.X509AuthenticationFilter;
 import org.springframework.security.web.authentication.session.RegisterSessionAuthenticationStrategy;
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -73,14 +72,14 @@ public class SpringKeycloakSecurityConfiguration {
       return new MultitenantKeycloakAuthenticationEntryPoint(adapterDeploymentContext());
     }
 
-    @Override
-    protected KeycloakAuthenticationProcessingFilter keycloakAuthenticationProcessingFilter()
-        throws Exception {
-      KeycloakAuthenticationProcessingFilter filter = new KeycloakAuthenticationProcessingFilter(
-          authenticationManager(), new AntPathRequestMatcher("/tenant/*/sso/login"));
-      filter.setSessionAuthenticationStrategy(sessionAuthenticationStrategy());
-      return filter;
-    }
+    // @Override
+    // protected KeycloakAuthenticationProcessingFilter keycloakAuthenticationProcessingFilter()
+    // throws Exception {
+    // KeycloakAuthenticationProcessingFilter filter = new KeycloakAuthenticationProcessingFilter(
+    // authenticationManager(), new AntPathRequestMatcher("/tenant/*/sso/login"));
+    // filter.setSessionAuthenticationStrategy(sessionAuthenticationStrategy());
+    // return filter;
+    // }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Bean
@@ -139,7 +138,7 @@ public class SpringKeycloakSecurityConfiguration {
     protected void configure(HttpSecurity http) throws Exception {
       http.sessionManagement()
           // use previously declared bean
-          .sessionAuthenticationStrategy(sessionAuthenticationStrategy())
+          // .sessionAuthenticationStrategy(sessionAuthenticationStrategy())
 
           // keycloak filters for securisation
           .and().addFilterBefore(keycloakPreAuthActionsFilter(), LogoutFilter.class)
@@ -155,9 +154,21 @@ public class SpringKeycloakSecurityConfiguration {
               // logout handler for API
               (HttpServletRequest request, HttpServletResponse response,
                   Authentication authentication) -> response.setStatus(HttpServletResponse.SC_OK))
-          .and().apply(new SpringKeycloakSecurityAdapter());
+          .and().apply(new SpringKeycloakSecurityAdapter())
+
+      // .and().oauth2Login().and().oauth2ResourceServer().jwt()
+      // .jwtAuthenticationConverter(authenticationConverter()).and().and().oauth2Client()
+
+      ;
 
     }
+
+    // Converter<Jwt, AbstractAuthenticationToken> authenticationConverter() {
+    // JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
+    // jwtAuthenticationConverter
+    // .setJwtGrantedAuthoritiesConverter(new JwtGrantedAuthorityConverter());
+    // return jwtAuthenticationConverter;
+    // }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {

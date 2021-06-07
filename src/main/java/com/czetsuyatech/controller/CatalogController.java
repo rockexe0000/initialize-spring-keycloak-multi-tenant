@@ -2,13 +2,19 @@ package com.czetsuyatech.controller;
 
 import java.security.Principal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import javax.servlet.Filter;
 import org.keycloak.KeycloakPrincipal;
 import org.keycloak.KeycloakSecurityContext;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.keycloak.representations.AccessToken;
 import org.keycloak.representations.IDToken;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.FilterChainProxy;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,6 +23,19 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class CatalogController {
+
+  @Autowired
+  @Qualifier("springSecurityFilterChain")
+  private Filter springSecurityFilterChain;
+
+  public void getFilters() {
+    FilterChainProxy filterChainProxy = (FilterChainProxy) springSecurityFilterChain;
+    List<SecurityFilterChain> list = filterChainProxy.getFilterChains();
+    list.stream().flatMap(chain -> chain.getFilters().stream())
+        .forEach(filter -> System.out.println(filter.getClass()));
+  }
+
+
 
   @GetMapping("/tenant/branch1/catalog")
   public Map listCatalogBranch1() {
@@ -30,6 +49,7 @@ public class CatalogController {
 
   @GetMapping("/tenant/test1/catalog")
   public Map listCatalogTest1() {
+    getFilters();
     return getUserInfo();
   }
 

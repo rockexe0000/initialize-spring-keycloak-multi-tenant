@@ -54,37 +54,6 @@ public class CityController {
     String realm = tenantID;
 
 
-    /**
-     * var jsonObject = (JSONObject) JSONObject.toJSON(request.getParameterMap()); // NOSONAR
-     * 
-     * Map<String, Object> headers = new HashMap<>(); headers.put(HttpHeaders.CONTENT_TYPE,
-     * MediaType.APPLICATION_FORM_URLENCODED_VALUE); headers.put(HttpHeaders.HOST, new
-     * URL("http://localhost:8081").getHost()); headers.put("X-TenantID", tenantID);
-     * 
-     * logger.debug("headers=[" + jsonObject.toJSON(headers) + "]"); // NOSONAR
-     * 
-     * 
-     * 
-     * String jsonString = IOUtils.toString(request.getInputStream());
-     * 
-     * logger.debug("request=[" + jsonObject.toJSON(jsonString) + "]"); // NOSONAR
-     * 
-     * // request.getParameter("username") // request.getParameter("password") Map<String, Object>
-     * body = new HashMap<>();
-     * 
-     * body.put("client_id", tenantID); body.put("username", "user001"); body.put("password",
-     * "user001"); body.put("grant_type", "password");
-     * 
-     * logger.debug("body=[" + jsonObject.toJSON(body) + "]"); // NOSONAR
-     * 
-     * 
-     * var feignClient = tenantHttpClient.getIdToken(headers, body); logger.debug("feignClient=[" +
-     * jsonObject.toJSON(feignClient) + "]"); // NOSONAR
-     * 
-     * logger.debug("feignClient.StatusCode=[" + feignClient.getStatusCodeValue() + "]"); // NOSONAR
-     * logger.debug("feignClient.getBody()=[" + feignClient.getBody() + "]"); // NOSONAR
-     */
-
 
     return ResponseEntity.ok(getUserInfo());
   }
@@ -138,6 +107,60 @@ public class CityController {
 
     // return "userInfo " + tokenInfo;
   }
+
+
+
+  // @RequestMapping(path = "/login", method = RequestMethod.GET)
+  // public ResponseEntity<?> login(HttpServletRequest request)
+  // throws ServletException, IOException, MalformedURLException {
+  //
+  //
+  //
+  // String tenantID = request.getHeader("X-TenantID");
+  // if (tenantID.isBlank()) {
+  // throw new IllegalStateException("Not able to resolve realm from the request path!");
+  // }
+  // String realm = tenantID;
+  //
+  //
+  //
+  // var jsonObject = (JSONObject) JSONObject.toJSON(request.getParameterMap()); // NOSONAR
+  //
+  // Map<String, Object> headers = new HashMap<>();
+  // headers.put(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED_VALUE);
+  // headers.put(HttpHeaders.HOST, new URL("http://localhost:8081").getHost());
+  // headers.put("X-TenantID", tenantID);
+  //
+  // logger.debug("headers=[" + jsonObject.toJSON(headers) + "]"); // NOSONAR
+  //
+  //
+  //
+  // // String jsonString = IOUtils.toString(request.getInputStream());
+  //
+  // // logger.debug("request=[" + jsonObject.toJSON(jsonString) + "]"); // NOSONAR
+  //
+  // // request.getParameter("username") // request.getParameter("password") Map<String, Object>
+  // Map<String, Object> body = new HashMap<>();
+  //
+  // body.put("client_id", tenantID);
+  // body.put("username", "user001");
+  // body.put("password", "user001");
+  // body.put("grant_type", "password");
+  //
+  // logger.debug("body=[" + jsonObject.toJSON(body) + "]"); // NOSONAR
+  //
+  //
+  // var feignClient = tenantHttpClient.getIdToken(headers, body);
+  // logger.debug("feignClient=[" + jsonObject.toJSON(feignClient) + "]"); // NOSONAR
+  //
+  // logger.debug("feignClient.StatusCode=[" + feignClient.getStatusCodeValue() + "]"); // NOSONAR
+  // logger.debug("feignClient.getBody()=[" + feignClient.getBody() + "]"); // NOSONAR
+  //
+  //
+  //
+  // return new ResponseEntity<>(HttpStatus.OK);
+  // }
+
 
 
   @RequestMapping(path = "/logout", method = RequestMethod.GET)
